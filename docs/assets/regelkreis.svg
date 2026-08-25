@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340"
+     width="880" height="340" role="img"
+     aria-label="Der Regelkreis: Ereignis, Botenstoffe, Zustände, Prompt">
+<style>
+  .bg   { fill: #FBFCFB; }
+  .box  { fill: #F1F4F2; stroke: #D5DCD9; stroke-width: 1.2; }
+  .core { fill: #F0DED5; stroke: #A94A24; stroke-width: 1.4; }
+  .t    { fill: #16211F; font: 600 14px 'Zilla Slab', Georgia, serif; }
+  .s    { fill: #5C6B67; font: 400 11px 'Source Sans 3', system-ui, sans-serif; }
+  .m    { fill: #8C9A95; font: 500 10px 'IBM Plex Mono', ui-monospace, monospace; }
+  .a    { stroke: #8C9A95; stroke-width: 1.4; fill: none; }
+  .af   { fill: #8C9A95; }
+  .back { stroke: #A94A24; stroke-width: 1.4; fill: none; stroke-dasharray: 4 3; }
+  .backf{ fill: #A94A24; }
+  .backl{ fill: #A94A24; font: 500 10px 'IBM Plex Mono', ui-monospace, monospace; }
+  @media (prefers-color-scheme: dark) {
+    .bg   { fill: #161F1C; }
+    .box  { fill: #1C2724; stroke: #2C3835; }
+    .core { fill: #3A2318; stroke: #E08050; }
+    .t    { fill: #E3EAE7; }
+    .s    { fill: #93A29D; }
+    .m    { fill: #6D7C77; }
+    .a    { stroke: #6D7C77; }
+    .af   { fill: #6D7C77; }
+    .back { stroke: #E08050; }
+    .backf{ fill: #E08050; }
+    .backl{ fill: #E08050; }
+  }
+</style>
+<rect class="bg" width="880" height="340"/>
+<defs>
+  <marker id="h" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <path d="M0,0 L7,3.5 L0,7 z" class="af"/>
+  </marker>
+  <marker id="hb" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <path d="M0,0 L7,3.5 L0,7 z" class="backf"/>
+  </marker>
+</defs>
+
+<rect class="box" x="20" y="112" width="150" height="66" rx="2"/>
+<text class="t" x="95" y="140" text-anchor="middle">Ereignis</text>
+<text class="s" x="95" y="160" text-anchor="middle">„Build ist rot"</text>
+
+<line class="a" x1="176" y1="145" x2="222" y2="145" marker-end="url(#h)"/>
+
+<rect class="core" x="228" y="60" width="196" height="170" rx="2"/>
+<text class="t" x="326" y="88" text-anchor="middle">Botenstoffe</text>
+<text class="s" x="326" y="110" text-anchor="middle">schütten aus · zerfallen</text>
+<text class="s" x="326" y="127" text-anchor="middle">koppeln sich</text>
+<text class="m" x="326" y="156" text-anchor="middle">Rate pro Stunde</text>
+<line class="a" x1="256" y1="172" x2="396" y2="172"/>
+<text class="s" x="326" y="192" text-anchor="middle">Ruhewert =</text>
+<text class="m" x="326" y="210" text-anchor="middle">Grund · Rhythmus</text>
+<text class="m" x="326" y="224" text-anchor="middle">Stimmung · Drift</text>
+
+<line class="a" x1="430" y1="145" x2="476" y2="145" marker-end="url(#h)"/>
+
+<rect class="box" x="482" y="96" width="164" height="98" rx="2"/>
+<text class="t" x="564" y="124" text-anchor="middle">Zustände</text>
+<text class="s" x="564" y="145" text-anchor="middle">FEUER · FOKUS</text>
+<text class="s" x="564" y="162" text-anchor="middle">RUHIG · MÜDE</text>
+<text class="m" x="564" y="182" text-anchor="middle">aus dem Profil</text>
+
+<line class="a" x1="652" y1="145" x2="698" y2="145" marker-end="url(#h)"/>
+
+<rect class="box" x="704" y="112" width="156" height="66" rx="2"/>
+<text class="t" x="782" y="140" text-anchor="middle">Tonfall</text>
+<text class="s" x="782" y="160" text-anchor="middle">Prompt-Zusatz</text>
+
+<path class="back" d="M782,186 L782,272 L326,272 L326,238" marker-end="url(#hb)"/>
+<text class="backl" x="554" y="290" text-anchor="middle">
+  Was daraus wird, verändert wieder den Zustand
+</text>
+
+<text class="m" x="95" y="200" text-anchor="middle">event()</text>
+<text class="m" x="782" y="200" text-anchor="middle">render()</text>
+<text class="m" x="326" y="46" text-anchor="middle">equilibrium() sagt vorher, wo das landet</text>
+</svg>
