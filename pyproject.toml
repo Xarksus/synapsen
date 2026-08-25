@@ -32,8 +32,8 @@ synapsen = "synapsen.cli:main"
 synapsen-mcp = "synapsen.mcp_server:main"
 
 [project.urls]
-Homepage = "https://github.com/USER/synapsen"
-Issues = "https://github.com/USER/synapsen/issues"
+Homepage = "https://github.com/xarksus/synapsen"
+Issues = "https://github.com/xarksus/synapsen/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["synapsen"]

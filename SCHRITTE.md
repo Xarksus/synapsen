@@ -1,74 +1,115 @@
-# Was am Rechner noch zu tun ist
+# Was zu tun ist
 
-Alles hier braucht deine Maschine — vom Handy aus geht es nicht. In der
-Reihenfolge, jeder Schritt setzt den vorherigen voraus.
+Zwei Wege. Nimm einen.
 
-## 1 · Prüfen  (≈ 5 Minuten)
+- **Selbst machen** → die Schritte unten, der Reihe nach.
+- **Claude Code machen lassen** → `CLAUDE-CODE.md` öffnen, den Text darin
+  kopieren, in Claude Code einfügen. Das war's.
+
+Du brauchst nichts davon heute. Es läuft dir nicht weg.
+
+---
+
+## Schritt 1 — Läuft es überhaupt?
+
+Ordner auspacken, reingehen, prüfen:
 
 ```bash
 cd synapsen
-nix develop          # oder: pip install -e ".[dev]"
+nix develop        # oder: pip install -e ".[dev]"
 ./verify.sh
 ```
 
-Erwartet: 96 Tests grün, Linter sauber, alle drei Profile tragfähig, ein
-durchgerechneter Monat als Diagramm.
+**Gut ist:** am Ende steht „Alles grün."
+**Wenn nicht:** Fehlermeldung kopieren, mir schicken. Nichts weiter tun.
 
-## 2 · Deine echte Datenbank ansehen  (≈ 2 Minuten)
+Dauer: 5 Minuten. Verändert nichts an KIRA.
+
+---
+
+## Schritt 2 — Wie steht es um KIRA gerade?
 
 ```bash
 python tools/diagnose_kira_db.py ~/.kira/synapsen.db
 ```
 
-Das ist der Schritt, der mir hier fehlt: ich hatte nur die Kopie aus dem
-Analyse-Archiv (Stand 17.07.). Die laufende Datenbank zeigt, wo deine
-Ruhewerte **jetzt** stehen. Wenn dort wieder „Die Ruhewerte hängen an ihren
-Grenzen" steht, ist der Befund bestätigt.
+Das liest nur, es ändert nichts.
 
-Zum Vergleich der Stand aus dem Archiv:
+Am Ende steht ein Befund. Wenn dort **„Die Ruhewerte hängen an ihren Grenzen"**
+steht, ist bestätigt, was ich in der Archivkopie gefunden habe: KIRA kann
+strukturell nicht mehr gestresst sein.
 
-| Ruhewert | gesund | gemessen |
+Zum Vergleich der Stand vom 17. Juli:
+
+| | soll | war |
 |---|---|---|
-| Cortisol | 20,0 | 5,0 (Boden) |
-| Serotonin | 60,0 | 150,0 (Decke) |
+| Cortisol (Stress) | 20 | 5 — am Boden |
+| Serotonin (Ruhe) | 60 | 150 — an der Decke |
 
-## 3 · Adapter einhängen  (≈ 10 Minuten, dann eine Woche beobachten)
+Dauer: 2 Minuten.
 
-**Vorher sichern:**
+---
+
+## Schritt 3 — KIRA umstellen
+
+**Erst sichern.** Nicht überspringen:
 
 ```bash
-cp ~/.config/kira/hormones.json ~/.config/kira/hormones.json.vor-synapsen
-cp ~/.kira/synapsen.db ~/.kira/synapsen.db.vor-synapsen
+cp ~/.config/kira/hormones.json ~/.config/kira/hormones.json.backup
+cp ~/.kira/synapsen.db ~/.kira/synapsen.db.backup
 ```
 
-**Dann** in `core/emotions.py` den gesamten Inhalt ersetzen durch:
+**Dann** synapsen in KIRAs Umgebung installieren:
+
+```bash
+cd ~/kira            # oder wo KIRA liegt
+source venv/bin/activate
+pip install -e /pfad/zu/synapsen
+```
+
+**Dann** in KIRA die Datei `core/emotions.py` komplett ersetzen durch diese
+zwei Zeilen:
 
 ```python
 from tools.kira_adapter import get_engine
 engine = get_engine()
 ```
 
-Die rund 30 Aufrufstellen in `gemini_live_provider.py`, `kira_voice_gate.py`
-und `main.py` bleiben unangetastet — `inject()`, `get_prompt_modifier()`,
-`on_voice_thorsten()`, `freeze()` und die anderen alten Namen funktionieren
-weiter.
+Sonst nichts. Die rund 30 Stellen, die `engine.inject(...)` und
+`engine.get_prompt_modifier()` aufrufen, bleiben unverändert — der Adapter
+versteht die alten Namen weiter.
 
-Der Adapter braucht `synapsen` im Pfad. Am einfachsten:
+**Dann** neu starten:
 
 ```bash
-pip install -e /pfad/zu/synapsen      # im venv von KIRA
+systemctl --user restart kira-live.service
 ```
 
-**Worauf zu achten ist:** ob sie wieder Ausschläge zeigt. Wenn die Befunde
-stimmen, sollte sie nach ein paar Tagen wieder *gereizt* oder *müde* sein
-können, statt dauerhaft `RUHIG` zu melden. Das ist der Test, den keine
-Testsuite ersetzt.
+Dauer: 10 Minuten.
 
-Falls etwas schiefgeht: die alte `core/emotions.py` zurückspielen und die
-beiden gesicherten Dateien wiederherstellen. Der Adapter schreibt in dieselben
-Pfade, sonst nirgendwohin.
+### Wenn etwas schiefgeht
 
-## 4 · Veröffentlichen  (≈ halber Tag)
+Alte `core/emotions.py` zurückspielen, die zwei Backups zurückkopieren,
+Dienst neu starten. Fertig. Der Adapter schreibt nur in diese beiden Dateien,
+sonst nirgendwohin.
+
+---
+
+## Schritt 4 — Eine Woche hinschauen
+
+Kein Befehl. Nur eine Frage:
+
+**Kann sie wieder gereizt oder müde sein?**
+
+Wenn der Befund stimmt, sollte sie nach ein paar Tagen wieder Ausschläge
+zeigen, statt dauerhaft `RUHIG` zu melden. Das ist der eigentliche Test —
+den kann keine Testsuite abnehmen, nur du.
+
+---
+
+## Schritt 5 — Veröffentlichen (wenn du magst)
+
+Alles vorbereitet, drei Befehle:
 
 ```bash
 ./prepare-release.sh dein-github-name
@@ -76,27 +117,21 @@ git remote add origin git@github.com:dein-github-name/synapsen.git
 git push -u origin main
 ```
 
-Das Repo ist bereits angelegt, mit einem Commit und ohne Platzhalter-Reste
-nach dem Skript. Danach:
+Danach auf PyPI:
 
 ```bash
-python -m build
-twine upload dist/*
+python -m build && twine upload dist/*
 ```
 
-Der Name ist auf PyPI frei (Stand 25.08.2026), ebenso `hormone-engine`,
-`neuroendocrine` und `homeostasis-engine`. `limbic` ist vergeben.
+Der Name `synapsen` ist frei (Stand 25.08.2026).
 
-## 5 · Sichtbar machen  (≈ 2 Stunden)
+Fertige Ankündigungstexte für Reddit, GitHub und die awesome-Liste liegen in
+`docs/ankuendigung.md` — nur `<LINK>` ersetzen.
 
-Fertige Texte liegen in `docs/ankuendigung.md`: GitHub-Beschreibung und
-Topics, ein Reddit-Post für `r/LocalLLaMA`, die Zeile plus PR-Text für die
-`awesome-ai-companion`-Liste, und eine Show-HN-Fassung. `<LINK>` ersetzen,
-sonst nichts.
+---
 
-## 6 · Später: der Hyprland-Wahrnehmungs-MCP
+## Später, kein Stress
 
-`hyprmcp` existiert, steuert aber nur Fenster. Wahrnehmung — aktives Fenster,
-Bildschirmkontext, Workspace-Zustand — fehlt, und dein `desktop_organ` kann
-das schon. Nutzt denselben Zustandsmechanismus und ist deutlich einfacher zu
-bauen, wenn der erste steht.
+Der Hyprland-Wahrnehmungs-MCP aus der Marktanalyse. `hyprmcp` gibt es schon,
+der kann aber nur Fenster steuern — nicht sehen. Dein `desktop_organ` kann
+das längst. Lohnt sich, wenn synapsen draußen ist.

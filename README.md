@@ -1,5 +1,8 @@
 # synapsen
 
+> **Zum Loslegen:** [SCHRITTE.md](SCHRITTE.md) — was zu tun ist, der Reihe nach.
+> Oder [CLAUDE-CODE.md](CLAUDE-CODE.md) kopieren und Claude Code machen lassen.
+
 **Ein homöostatischer Zustandskern für Agenten.** Botenstoffe statt Stimmungs-Strings.
 
 Die meisten Agenten haben keinen Zustand — sie haben ein Adjektiv im Prompt.
