@@ -1,8 +1,5 @@
 # synapsen
 
-> **Zum Loslegen:** [SCHRITTE.md](SCHRITTE.md) — was zu tun ist, der Reihe nach.
-> Oder [CLAUDE-CODE.md](CLAUDE-CODE.md) kopieren und Claude Code machen lassen.
-
 **Ein homöostatischer Zustandskern für Agenten.** Botenstoffe statt Stimmungs-Strings.
 
 Die meisten Agenten haben keinen Zustand — sie haben ein Adjektiv im Prompt.
@@ -247,7 +244,7 @@ Werkzeuge: `state_read`, `state_prompt`, `state_event`, `state_inject`,
 ## NixOS
 
 ```bash
-nix run github:USER/synapsen -- doctor
+nix run github:Xarksus/synapsen -- doctor
 nix develop            # Entwicklungsumgebung mit pytest und ruff
 ```
 
@@ -259,16 +256,6 @@ Das Flake liefert `packages.default`, `apps.mcp` und eine `devShell`.
 liest die Spalten der Tabelle aus und schreibt, was passt. Eine bestehende
 Datenbank mit `emotional_log` funktioniert unverändert. Für ein neues Protokoll
 legt `SqliteJournal.for_profile(pfad, profil)` die Spalten des Profils an.
-
-Vorher lohnt eine Diagnose:
-
-```bash
-python tools/diagnose_kira_db.py ~/.kira/synapsen.db
-```
-
-`tools/kira_adapter.py` bildet zusätzlich die alte Oberfläche auf dem neuen
-Kern ab — eine geänderte Importzeile, und die bestehenden Aufrufstellen laufen
-weiter.
 
 ## Entwicklung
 

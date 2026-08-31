@@ -34,7 +34,7 @@
 
           meta = with pkgs.lib; {
             description = "Homöostatischer Zustandskern für Agenten";
-            homepage = "https://github.com/USER/synapsen";
+            homepage = "https://github.com/Xarksus/synapsen";
             license = licenses.asl20;
             mainProgram = "synapsen";
           };

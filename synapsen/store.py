@@ -1,10 +1,8 @@
 """Zustands-Persistenz — austauschbar, und gegen die üblichen Rennen gesichert.
 
-Warum das eine eigene Schicht ist: In KIRA schreiben zwei Prozesse dieselbe
-Datei (`hormones.json`) — die EmotionEngine und `kira_core_state.py`. Der
-Kommentar im Original sagt es selbst: "core_state darf NICHT die ganze Datei
-überschreiben — sonst friert es den Hormon-Block ein und kämpft gegen den
-Decay".
+Warum das eine eigene Schicht ist: Wenn mehrere Prozesse dieselbe Zustandsdatei
+schreiben, ist ein ungesichertes read-modify-write die häufigste Fehlerquelle —
+der zweite Schreiber überschreibt den ersten.
 
 `JsonStore` löst das zweistufig:
 
