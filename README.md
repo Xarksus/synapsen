@@ -11,13 +11,21 @@ No dependencies beyond the standard library. Python ≥ 3.10.
 
 ![The feedback loop](docs/assets/regelkreis.svg)
 
+## Quick start
+
+```bash
+pip install synapsen
+```
+
 ```python
 from synapsen import HomeostasisEngine, PromptRenderer, JsonStore
 
+# Use the bundled kira profile — already calibrated from months of real use
 engine = HomeostasisEngine(store=JsonStore("~/.config/agent/state.json"))
 engine.event("task_success", context="deploy green")
 
-print(PromptRenderer().render(engine.snapshot()))
+# Inject the state into your agent's system prompt
+state_block = PromptRenderer().render(engine.snapshot())
 ```
 
 ```
@@ -39,6 +47,12 @@ What this means:
   → CALM (1.50) noticeable: Grounded, no need to prove anything.
   → Familiarity: 128
 ```
+
+The state block goes into your system prompt. The model reads it and adjusts
+its output accordingly — shorter under stress, warmer with high oxytocin — through
+normal language modeling. No sampling parameters are touched. No tool list is
+modified. The behavioral change emerges because the model is coherent with its
+own context.
 
 ---
 
@@ -65,7 +79,8 @@ causes.
 
 The default profile is not made-up numbers: these are the values of a system
 that ran continuously for two months — with 36,649 logged state events, from
-which the four bugs below emerged.
+which the four bugs below emerged. **The calibration work is done. The `kira`
+profile is ready to use as-is.**
 
 ## What you don't see until you compute it
 
@@ -213,11 +228,16 @@ profile = Profile(
 assert check(profile).ok
 ```
 
-Bundled are three deliberately very different profiles: **kira** (five
-neurotransmitters, bonding, circadian rhythm), **focus** (two axes, no
-relationship — for a coding agent that gets audibly terser after the fifth red
-build) and **pad** (Pleasure–Arousal–Dominance, the academic standard model,
-expressed in this framework).
+Bundled are three deliberately very different profiles:
+
+- **kira** — five neurotransmitters, bonding, circadian rhythm. Not a starting
+  guess: this profile emerged from months of continuous real-world agent
+  operation with tens of thousands of logged state events. Use it as-is, or
+  as a calibrated baseline for your own profile.
+- **focus** — two axes, no relationship. For a coding agent that gets audibly
+  terser after the fifth red build.
+- **pad** — Pleasure–Arousal–Dominance, the academic standard model, expressed
+  in this framework.
 
 ## As an MCP server
 
