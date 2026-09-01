@@ -1,0 +1,67 @@
+# synapsen
+
+> Homeostatic state engine for AI agents. Named neurotransmitters with decay, coupling, and circadian rhythm. Zero dependencies. Python ≥ 3.10. Apache-2.0.
+
+## What it is
+
+synapsen models agent state as a feedback loop: events release neurotransmitters, which decay at their own rates, couple with each other directionally (in units per hour, not per call), and follow a circadian rhythm. Behavior emerges from the dynamics — it is not set by hand.
+
+It was built after two months of production runtime revealed four silent bugs in a homeostatic system: coupling that scaled per-call instead of per-time (factor 60 error), a persistent condition logged as an event stream that drifted baselines to hard limits, a daily rhythm computed only at startup, and fatigue that grew without saturation or overnight recovery. All four would have been caught by `synapsen doctor` before the first process start.
+
+## Install
+
+```bash
+pip install git+https://github.com/Xarksus/synapsen.git
+```
+
+## Quick start
+
+```python
+from synapsen import HomeostasisEngine, PromptRenderer, JsonStore
+
+engine = HomeostasisEngine(store=JsonStore("~/.config/agent/state.json"))
+engine.event("task_success", context="deploy passed")
+print(PromptRenderer().render(engine.snapshot()))
+```
+
+## Key concepts
+
+- **Neurotransmitter**: a named value with baseline, decay rate, and ceiling
+- **Coupling**: directional interaction in units/hour (not per-call)
+- **Event**: what happened, not what should change (`task_failure` not `inject("cortisol", +12)`)
+- **Equilibrium**: `engine.equilibrium()` computes the resting point analytically
+- **doctor**: validates a profile for pathological configurations before runtime
+- **simulate**: runs months of time in milliseconds for tuning and regression tests
+
+## CLI
+
+```
+synapsen doctor          # validate profile
+synapsen simulate        # run time forward
+synapsen show            # current state as prompt
+synapsen why             # explain current values
+synapsen event <name>    # fire an event
+synapsen-mcp             # run as MCP server
+```
+
+## MCP server
+
+```json
+{
+  "mcpServers": {
+    "synapsen": {
+      "command": "synapsen-mcp",
+      "args": ["--state", "~/.config/agent/state.json"]
+    }
+  }
+}
+```
+
+Tools: `state_read`, `state_prompt`, `state_event`, `state_inject`, `state_why`, `state_settle`, `state_history`
+
+## Links
+
+- GitHub: https://github.com/Xarksus/synapsen
+- License: Apache-2.0
+- Python: ≥ 3.10
+- Dependencies: none (stdlib only)
