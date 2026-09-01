@@ -1,17 +1,30 @@
-                                 Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+Copyright (c) 2026 Thorsten P. (Xarksus). All rights reserved.
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+Source Available License — Non-Commercial
 
-       http://www.apache.org/licenses/LICENSE-2.0
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use
+the Software for personal, private, educational, or research purposes only,
+subject to the following conditions:
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+PERMITTED:
+- Reading, studying, and evaluating the source code
+- Using the Software for personal or private projects
+- Using the Software for non-commercial research or education
+- Contributing improvements via pull request (copyright remains with the author)
 
-   Der vollständige Lizenztext ist unter der obigen Adresse abrufbar.
+NOT PERMITTED without prior written permission from the copyright holder:
+- Commercial use of any kind (including use in a product or service that
+  generates revenue, directly or indirectly)
+- Selling, sublicensing, or redistributing the Software or any derivative
+- Incorporating the Software into a commercial product or service
+- Offering the Software as a hosted or managed service
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+To obtain a commercial license, contact: thorstenp1980@gmail.com
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THIS SOFTWARE.
