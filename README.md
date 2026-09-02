@@ -56,6 +56,10 @@ own context.
 
 ---
 
+### Example UI Dashboard
+If you prefer a native desktop UI over terminal commands, check out `examples/dashboard/`. It demonstrates how to take the state data (from `synapsen.db` and `hormones.json`) and render it into a beautiful, native GTK3+WebKit2 window with ECharts.
+
+
 ## What's different here
 
 Emotion models for agents exist: PAD vectors, appraisal models, mood weights.
