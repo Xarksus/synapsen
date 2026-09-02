@@ -57,6 +57,9 @@ own context.
 ---
 
 ### Example UI Dashboard
+
+![KIRA Bio-Sync Dashboard](docs/assets/dashboard.png)
+
 If you prefer a native desktop UI over terminal commands, check out `examples/dashboard/`. It demonstrates how to take the state data (from `synapsen.db` and `hormones.json`) and render it into a beautiful, native GTK3+WebKit2 window with ECharts.
 
 
