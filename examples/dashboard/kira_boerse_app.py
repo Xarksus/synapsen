@@ -10,10 +10,15 @@ os.environ.setdefault("GDK_BACKEND", "x11")
 os.environ.setdefault("WEBKIT_DISABLE_DMABUF_RENDERER", "1")
 os.environ.setdefault("WEBKIT_DISABLE_COMPOSITING_MODE", "1")
 
-import gi, sys, subprocess
+# Die Umgebungsvariablen oben müssen vor dem gi-Import gesetzt sein, und
+# gi.require_version vor dem Import aus gi.repository — daher die noqa.
+import sys  # noqa: E402
+import subprocess  # noqa: E402
+
+import gi  # noqa: E402
 gi.require_version("Gtk", "3.0")
 gi.require_version("WebKit2", "4.1")
-from gi.repository import Gtk, WebKit2, GLib, Gdk
+from gi.repository import Gtk, WebKit2, GLib, Gdk  # noqa: E402
 
 GEN  = "/kirazone/kira/tools/kira_boerse.py"
 HTML = "/tmp/kira_boerse.html"

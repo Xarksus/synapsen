@@ -1,6 +1,6 @@
 # synapsen
 
-> Homeostatic state engine for AI agents. Named neurotransmitters with decay, coupling, and circadian rhythm. Zero dependencies. Python ≥ 3.10. Apache-2.0.
+> Homeostatic state engine for AI agents. Named neurotransmitters with decay, coupling, and circadian rhythm. Zero dependencies. Python ≥ 3.10. PolyForm Noncommercial 1.0.0.
 
 ## What it is
 
@@ -62,6 +62,6 @@ Tools: `state_read`, `state_prompt`, `state_event`, `state_inject`, `state_why`,
 ## Links
 
 - GitHub: https://github.com/Xarksus/synapsen
-- License: Apache-2.0
+- License: PolyForm Noncommercial 1.0.0 (commercial use requires a separate license)
 - Python: ≥ 3.10
 - Dependencies: none (stdlib only)

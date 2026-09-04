@@ -5,7 +5,7 @@
 Most agents have no state — they have an adjective in the prompt.
 `synapsen` models a feedback loop instead: events release neurotransmitters
 that decay, influence each other, and follow a circadian rhythm. Behavior is
-not set, it *emerges*.
+not hardcoded per situation — it is derived from a state that has history.
 
 No dependencies beyond the standard library. Python ≥ 3.10.
 
@@ -14,7 +14,7 @@ No dependencies beyond the standard library. Python ≥ 3.10.
 ## Quick start
 
 ```bash
-pip install synapsen
+pip install git+https://github.com/Xarksus/synapsen
 ```
 
 ```python
@@ -48,11 +48,17 @@ What this means:
   → Familiarity: 128
 ```
 
-The state block goes into your system prompt. The model reads it and adjusts
-its output accordingly — shorter under stress, warmer with high oxytocin — through
-normal language modeling. No sampling parameters are touched. No tool list is
-modified. The behavioral change emerges because the model is coherent with its
-own context.
+The state block goes into your system prompt. The `What this means` lines are
+state labels rather than imperatives, but a model that reads them will act on
+them — that much is ordinary instruction-following, and this library does not
+claim otherwise. What `synapsen` contributes is not the injection of a line of
+text, but **which line is there and when**: the selection comes from an
+inertial, coupled feedback loop running on real elapsed time, not from an `if`
+on the last event.
+
+No sampling parameters are touched. No tool list is modified. Whether this
+produces measurably different behavior than a static line would is an open
+question — see [Limitations](#limitations).
 
 ---
 
@@ -85,13 +91,13 @@ causes.
 | Persistence | process lifetime | file or SQLite, cross-process |
 
 The default profile is not made-up numbers: these are the values of a system
-that ran continuously for two months — with 36,649 logged state events, from
-which the four bugs below emerged. **The calibration work is done. The `kira`
-profile is ready to use as-is.**
+that has been running continuously since April 2026 — with 36,649 logged state
+events over the first two months alone, from which the four bugs below came.
+**The calibration work is done. The `kira` profile is ready to use as-is.**
 
 ## What you don't see until you compute it
 
-The original version ran continuously for two months without anything obviously
+The original version ran continuously for months without anything obviously
 breaking. These four bugs only became visible through the tools in this package
 — and all four would have been caught by `synapsen doctor` in milliseconds.
 That's exactly why the tools exist.
@@ -150,7 +156,7 @@ was once reached.
 ## Tools
 
 ```bash
-pip install synapsen
+pip install git+https://github.com/Xarksus/synapsen
 
 synapsen profiles                 # bundled profiles
 synapsen doctor                   # validate profile — before deployment
@@ -296,6 +302,28 @@ ruff check .
 python tools/make_assets.py # regenerate images
 ```
 
+## Limitations
+
+**No controlled evaluation yet.** The `kira` profile comes from months of daily
+use, and the behavior looks right. But the only observer was the person who knew
+the state values. A blind A/B test — state block on or off, same prompt, same
+model, independent raters — has not been run. Until it has, treat "it works" as
+a hypothesis, not a result.
+
+**The text in the block does the visible work.** The state block contains
+plain-language state labels, and a model that reads them will act on them. The
+claim made here is about *how those lines get selected over time*, not about
+behavior arising from numbers alone.
+
+**Neurotransmitter names are a design vocabulary, not biology.** The half-lives
+are tuned for agent behavior, not taken from endocrinology. The names carry
+useful intuitions — habituation, inertia, bonding that cools but never resets —
+and no scientific authority whatsoever.
+
 ## License
 
-Apache-2.0.
+[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0).
+
+Free for any noncommercial purpose — personal projects, study, research, and
+use by nonprofit, educational and government organizations. Commercial use
+requires a separate license: thorstenp1980@gmail.com
