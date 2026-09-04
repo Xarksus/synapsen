@@ -4,7 +4,9 @@
 # Liest hormones.json + synapsen.db, baut ein schönes HTML mit ECharts.
 # Aufruf: python3 kira_boerse.py  →  öffnet /tmp/kira_boerse.html im Browser.
 # ─────────────────────────────────────────────────────────────────────────────
-import json, sqlite3, html, webbrowser
+import json
+import sqlite3
+import html
 from pathlib import Path
 from datetime import datetime
 
