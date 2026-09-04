@@ -298,4 +298,8 @@ python tools/make_assets.py # regenerate images
 
 ## License
 
-Apache-2.0.
+[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0).
+
+Free for any noncommercial purpose — personal projects, study, research, and
+use by nonprofit, educational and government organizations. Commercial use
+requires a separate license: thorstenp1980@gmail.com

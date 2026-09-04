@@ -90,10 +90,10 @@ Companion bauen.
 > function. Fifteen bugs total, in a system that ran and that nobody noticed
 > anything wrong with.
 >
-> Standard library only, Apache-2.0, three shipped profiles (one of them is
-> plain PAD, so if you're used to Pleasure–Arousal–Dominance you lose nothing
-> and gain decay and inertia). Also runs as an MCP server so several agents can
-> share one state across processes.
+> Standard library only, PolyForm Noncommercial (free for noncommercial use),
+> three shipped profiles (one of them is plain PAD, so if you're used to
+> Pleasure–Arousal–Dominance you lose nothing and gain decay and inertia). Also
+> runs as an MCP server so several agents can share one state across processes.
 >
 > Repo: <LINK>
 >

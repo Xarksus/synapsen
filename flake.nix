@@ -35,7 +35,11 @@
           meta = with pkgs.lib; {
             description = "Homöostatischer Zustandskern für Agenten";
             homepage = "https://github.com/Xarksus/synapsen";
-            license = licenses.asl20;
+            license = {
+              fullName = "PolyForm Noncommercial License 1.0.0";
+              url = "https://polyformproject.org/licenses/noncommercial/1.0.0";
+              free = false;
+            };
             mainProgram = "synapsen";
           };
         };
